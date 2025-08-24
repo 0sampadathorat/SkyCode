@@ -27,9 +27,12 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://github.com/0sampadathorat/SkyCode.git') {
+				docker push sampubeta/nodejs-app:$port
+				}
                 #cat ~/password.txt | docker login --username sampubeta --password-stdin
-                docker login --username sampubeta --password devOps777
-			    docker push sampubeta/nodejs-app:$port
+                #docker login --username sampubeta --password devOps777
+			    #docker push sampubeta/nodejs-app:$port
 		        '''
             }
         }
@@ -42,9 +45,12 @@ pipeline {
                   kubectl version
                   pwd
                   cd nodejs_app/
-                  docker login --username sampubeta --password devOps777
+                  #docker login --username sampubeta --password devOps777
+				  withDockerRegistry(credentialsId: 'dockerhub', url: 'https://github.com/0sampadathorat/SkyCode.git') {
+                  }
                   kubectl apply -f node_app_deploy.yaml --validate=false
                   kubectl apply -f node_app_service.yaml
+                  
                   sleep 5
                   kubectl patch svc node-app-service -p '{"spec": {"type": "NodePort"}}'
                   sleep 10
