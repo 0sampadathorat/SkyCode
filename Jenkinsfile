@@ -11,7 +11,7 @@ pipeline {
         )
         string(
             name: 'STAGE_NAME_2',
-            defaultValue: 'Second Stage',
+            defaultValue: 'Second Stage 2',
             description: 'The name for the second stage.'
         )
     }
