@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Echo First Parameter') {
             steps {
-                echo "The name of the first stage is: ${params.STAGE_NAME_1}"
+                echo "The name of the first stage is as : ${params.STAGE_NAME_1}"
             }
         }
         stage('Echo Second Parameter') {
